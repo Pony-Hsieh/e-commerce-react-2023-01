@@ -6,14 +6,15 @@
  */
 
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { cloneDeep } from 'lodash-es';
 import {
   addProduct,
   modifyProductAmount,
   decreaseProductAmount,
-  clearLocalStorageCart
+  clearLocalStorageCart,
+  selectLocalStorageCart
 } from '../slices/localStorageCartSlice';
 import {
   createOrder,
@@ -29,7 +30,7 @@ function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // 取得 local storage cart
-  const arrLocalStorageCart = JSON.parse(localStorage.getItem("arrLocalStorageCart")) || [];
+  const arrLocalStorageCart = useSelector(selectLocalStorageCart);
   const [recipientInfo, setRecipientInfo] = useState({
     user: {
       name: '',
