@@ -25,6 +25,15 @@ import {
   addToServerCart,
   deleteAllServerCart,
 } from '../api/serverCart';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 
 function Cart() {
   const navigate = useNavigate();
@@ -47,6 +56,10 @@ function Cart() {
     code: '', // 優惠碼
     percent: 100, // 折數，80 代表 8折
   });
+  // 確認是否將產品移出購物車 modal 的顯示狀態
+  const [deleteModalShowStatus, setDeleteModalShowStatus] = useState(false);
+  // 移出購物車產品的資料
+  const [dataProductToBeDeleted, setDataProductToBeDeleted] = useState({});
 
   /**
    * 商品 + 1
@@ -90,10 +103,10 @@ function Cart() {
    */
   function btnHandlerDeleteProduct(productInfo) {
     const dataProduct = cloneDeep(productInfo);
-    dispatch(modifyProductAmount({
-      dataProduct,
-      qty: 0
-    }));
+    // Step: 設置欲刪除商品資訊
+    setDataProductToBeDeleted(dataProduct);
+    // Step: 顯示刪除用 modal
+    setDeleteModalShowStatus(true);
   }
 
   /**
@@ -308,6 +321,20 @@ function Cart() {
     dispatch(clearLocalStorageCart());
   }
 
+  function handleClose() {
+    console.log('handleClose');
+    setDeleteModalShowStatus(false);
+  }
+
+  function handleRemoveProductFromCart(dataProduct) {
+    console.log('handleRemoveProductFromCart');
+    dispatch(modifyProductAmount({
+      dataProduct,
+      qty: 0
+    }));
+    setDeleteModalShowStatus(false);
+  }
+
   useEffect(() => {
     getCouponInfoFromLocalStorage();
   }, []);
@@ -406,6 +433,30 @@ function Cart() {
         <br />
         <button type='button' onClick={btnHandlerSubmitForm}>送出訂單</button>
       </form>
+      {/* DeletModal */}
+      <Box>
+        <Dialog
+          open={deleteModalShowStatus}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            確定要刪除嗎？
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              商品名稱： {dataProductToBeDeleted.title}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>取消</Button>
+            <Button onClick={() => {
+              handleRemoveProductFromCart(dataProductToBeDeleted)
+            }} color="error">刪除</Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
     </>
   );
 }

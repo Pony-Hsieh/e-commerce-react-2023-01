@@ -1,5 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import { cloneDeep } from 'lodash-es';
+import AlertMessage from '../components/AlertMessage';
 
 const initialState = JSON.parse(localStorage.getItem('arrLocalStorageCart')) || [];
 
@@ -47,7 +48,9 @@ export const localStorageCartSlice = createSlice({
       if (indexSameProduct === null) {
         state.push(convertedDataProduct);
         localStorage.setItem('arrLocalStorageCart', JSON.stringify(current(state)));
-        // TODO: 跳出彈出訊息提示使用者已經將商品加入購物車
+        AlertMessage.success({
+          content: `已加入 ${convertedDataProduct.qty} ${convertedDataProduct.unit} 至購物車`
+        });
       } else {
         localStorageCartSlice.caseReducers.mergeProductAmount(state, action);
       }
@@ -81,8 +84,9 @@ export const localStorageCartSlice = createSlice({
         }
         state.splice(indexSameProduct, 1, convertedDataProduct);
         localStorage.setItem('arrLocalStorageCart', JSON.stringify(current(state)));
-        // TODO: 跳出彈出訊息提示使用者已更新購物車內該商品的數量
-        console.warn(`已更新購物車內 ${convertedDataProduct.title} 的數量為 ${convertedDataProduct.qty} ${convertedDataProduct.unit}`);
+        AlertMessage.success({
+          content: `已更新購物車內的數量為 ${convertedDataProduct.qty} ${convertedDataProduct.unit}`
+        });
       }
     },
 
@@ -103,12 +107,12 @@ export const localStorageCartSlice = createSlice({
         return;
       }
       if (convertedDataProduct.qty === 0) {
-        // TODO: 跳出彈出訊息詢問使用者是否要刪除產品？
-        console.warn('是否刪除該產品？');
-        return;
         const convertedAction = cloneDeep(action);
         convertedAction.payload = convertedDataProduct.id;
         localStorageCartSlice.caseReducers.deleteProductAmount(state, convertedAction);
+        AlertMessage.success({
+          content: `已刪除 ${convertedDataProduct.title}`
+        });
         return;
       }
       if (qty > convertedDataProduct.num) {
