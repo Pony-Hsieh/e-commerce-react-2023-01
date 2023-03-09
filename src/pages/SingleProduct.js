@@ -9,6 +9,17 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getDataProductSingle } from '../api/product';
 import { addProduct } from '../slices/localStorageCartSlice';
+import {
+  Grid,
+  Box,
+  Typography,
+  Button,
+  IconButton
+} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import '../styles/singleProduct.css'
 
 function SingleProduct() {
   const dispatch = useDispatch();
@@ -140,33 +151,139 @@ function SingleProduct() {
         })
         .catch((err) => {
           console.error(err);
-          // TODO: 顯示查無此產品之類的資訊
+          // TODO:
+          // Step: 跳出提示訊息：查無此產品
+          // Step: 幾秒後跳轉回商品頁
         });
     }
   }, []);
 
   return (
-    <>
-      <div>Single Product Page</div>
-      <div>商品名稱：{dataProduct.title}</div>
-      <img src={dataProduct.imageUrl} style={{ width: '100px' }} />
-      <div>商品販售價格：{dataProduct.price}</div>
-      <div>商品庫存：{dataProduct.num}</div>
-      <div>欲加入數量: {numAddProduct}</div>
-      <p>商品描述：{dataProduct.description}</p>
-      <div>
-        {
-          dataProduct.is_enabled ?
-            <>
-              <button type='button' onClick={handlerDecreaseNumAddProduct}>-</button>
-              <button type='button' onClick={handlerAddProduct}>加入購物車</button>
-              <button type='button' onClick={handlerIncreaseNumAddProduct}>+</button>
-            </>
-            :
-            <p>未上架</p>
-        }
-      </div>
-    </>
+    <Box>
+      <Grid container spacing={{ xs: 0, md: 3 }} >
+        <Grid item xs sm />
+        <Grid item
+          xs={10}
+          sm={8}
+        >
+          <Box sx={(theme) => ({
+            paddingTop: {
+              sm: theme.spacing(6)
+            },
+          })}>
+            <Grid container spacing={4}>
+              <Grid item
+                xs={12}
+                sm={6}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <img
+                    src={dataProduct.imageUrl}
+                    className="w-full object-fit-contain"
+                    alt={dataProduct.title}
+                  />
+                </Box>
+              </Grid>
+              <Grid item
+                xs={12}
+                sm={6}
+              >
+                <Box
+                  sx={(theme) => ({
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    paddingX: {
+                      lg: theme.spacing(5)
+                    },
+                    width: "100%",
+                    height: "100%",
+                  })}
+                >
+                  <Typography variant="body1" component="p" gutterBottom>
+                    商品名稱：{dataProduct.title}
+                  </Typography>
+                  <Typography variant="body1" component="p" gutterBottom>
+                    商品販售價格：$ {dataProduct.price}
+                  </Typography>
+                  <Typography variant="body1" component="p" gutterBottom>
+                    商品庫存：{dataProduct.num}
+                  </Typography>
+                  <Typography variant="body1" component="p" gutterBottom>
+                    商品描述：
+                  </Typography>
+                  <Typography variant="body1" component="p" gutterBottom dangerouslySetInnerHTML={{ __html: dataProduct.description }} />
+                  <Box
+                    sx={(theme) => ({
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: theme.spacing(2)
+                    })}
+                  >
+                    {
+                      dataProduct.is_enabled ?
+                        <>
+                          <Box sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                          }}
+                          >
+                            <IconButton component="button"
+                              type="button"
+                              color="primary"
+                              aria-label="減少數量"
+                              onClick={handlerDecreaseNumAddProduct}
+                            >
+                              <RemoveIcon />
+                            </IconButton>
+                            <Button variant="outlined"
+                              sx={{ cursor: "default" }}
+                            >
+                              {numAddProduct}
+                            </Button>
+                            <IconButton component="button"
+                              type="button"
+                              color="primary"
+                              aria-label="增加數量"
+                              onClick={handlerIncreaseNumAddProduct}
+                            >
+                              <AddIcon />
+                            </IconButton>
+                          </Box>
+                          <Button variant="outlined"
+                            startIcon={<AddShoppingCartIcon />}
+                            sx={(theme) => ({
+                              marginTop: theme.spacing(2)
+                            })}
+                            onClick={handlerAddProduct}>
+                            加入購物車
+                          </Button>
+                        </>
+                        :
+                        <Typography variant="body1" component="p">
+                          未上架
+                        </Typography>
+                    }
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box >
+        </Grid >
+        <Grid item xs sm />
+      </Grid >
+    </Box >
   );
 }
 
