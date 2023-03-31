@@ -19,6 +19,7 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import NavBar from "../components/NavBar";
 import '../styles/singleProduct.css'
 
 function SingleProduct() {
@@ -159,7 +160,10 @@ function SingleProduct() {
   }, []);
 
   return (
-    <Box>
+    <Box sx={{
+      minHeight: "100vh",
+    }}>
+      <NavBar />
       <Grid container spacing={{ xs: 0, md: 3 }} >
         <Grid item xs sm />
         <Grid item
