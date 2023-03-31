@@ -21,6 +21,7 @@ import {
   TableRow,
   TableCell,
 } from '@mui/material';
+import AlertMessage from '../components/AlertMessage';
 
 function SingleOrder() {
   const [searchParams] = useSearchParams();
@@ -77,7 +78,9 @@ function SingleOrder() {
     try {
       const res = await payOrder(orderId);
       if (res.data.success) {
-        console.log('付款成功！');
+        AlertMessage.success({
+          content: '付款成功！'
+        });
         // 重新撈取訂單資料
         getInfoSingleOrder(orderId);
       }
