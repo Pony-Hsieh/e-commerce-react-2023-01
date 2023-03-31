@@ -14,6 +14,16 @@ import {
 
 const theme = createTheme({
   spacing: 8,
+  palette: {
+    primary: {
+      main: "#012A60",
+      contrastText: "#fff",
+    },
+    secondary: {
+      main: "#89D1C3",
+      contrastText: "#012A60",
+    },
+  },
 });
 
 function App() {
