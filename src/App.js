@@ -8,6 +8,9 @@ import ContactUs from './pages/ContactUs';
 import NoMatch from './pages/NoMatch';
 import CssBaseline from '@mui/material/CssBaseline'; // css normalize
 import { createTheme, ThemeProvider } from '@mui/material';
+import {
+  Box,
+} from '@mui/material';
 
 const theme = createTheme({
   spacing: 8,
@@ -18,15 +21,19 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Routes>
-          <Route path={'/'} element={<Home />}></Route>
-          <Route path={'/cart'} element={<Cart />}></Route>
-          <Route path={'/shop'} element={<Shop />}></Route>
-          <Route path={'/singleOrder'} element={<SingleOrder />}></Route>
-          <Route path={'/singleProduct'} element={<SingleProduct />}></Route>
-          <Route path={'/contactUs'} element={<ContactUs />}></Route>
-          <Route path={'*'} element={<NoMatch />}></Route>
-        </Routes>
+        <Box sx={{
+          backgroundColor: "#D1D9E2",
+        }}>
+          <Routes>
+            <Route path={'/'} element={<Home />}></Route>
+            <Route path={'/cart'} element={<Cart />}></Route>
+            <Route path={'/shop'} element={<Shop />}></Route>
+            <Route path={'/singleOrder'} element={<SingleOrder />}></Route>
+            <Route path={'/singleProduct'} element={<SingleProduct />}></Route>
+            <Route path={'/contactUs'} element={<ContactUs />}></Route>
+            <Route path={'*'} element={<NoMatch />}></Route>
+          </Routes>
+        </Box>
       </ThemeProvider>
     </>
   );
