@@ -42,6 +42,9 @@
 ## 參考文章
 越上方越晚被加入
 
+- 錯誤訊息：`React Hook useEffect has missing dependencies: 'dataProduct.title', 'haveNoProduct', and 'productId'. Either include them or remove the dependency array`
+  - [missing dependency：Either include it or remove the dependency array：解決 React Hook 中 useEffect 缺少依賴項的警告信息](https://blog.csdn.net/weixin_58576761/article/details/125693780)
+  - [[Day 20 - 即時天氣] 在 useEffect 中使用呼叫需被覆用的函式 - useCallback 的使用](https://ithelp.ithome.com.tw/articles/10225504)
 - Material Design
     - [UI / UX 設計白皮書 - Material Design 導讀 系列](https://ithelp.ithome.com.tw/users/20124956/ironman/2945)
     - [介紹| Google Material Design 正體中文版 - wcc723](https://wcc723.gitbooks.io/google_design_translate/content/material-design-introduction.html)
