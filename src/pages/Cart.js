@@ -26,14 +26,34 @@ import {
   deleteAllServerCart,
 } from '../api/serverCart';
 import {
+  Container,
   Box,
+  Typography,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TextField,
+  IconButton,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Stack,
 } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
+import NavBar from "../components/NavBar";
+import { flexCenter } from '../styles/muiCommonStyle';
 
 function Cart() {
   const navigate = useNavigate();
@@ -339,100 +359,299 @@ function Cart() {
     getCouponInfoFromLocalStorage();
   }, []);
 
-  const productList = arrLocalStorageCart
-    .map((eachProduct) => {
-      return (
-        <li key={eachProduct.id} style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-          {/* 商品名稱 */}
-          <div>{eachProduct.title}</div>
-          {/* 商品圖片 */}
-          <img src={eachProduct.imageUrl} alt={eachProduct.title} style={{
-            maxWidth: '100px',
-            justifyContent: 'space-between',
-          }} />
-          {/* 商品單價(僅 PC 版) */}
-          <div>{Number(eachProduct.price) * (usingCoupon.percent / 100)}</div>
-          {/* 商品小計 */}
-          <div>{Number(eachProduct.price) * (usingCoupon.percent / 100) * (eachProduct.qty)}</div>
-          {/* 商品數量 */}
-          <input type="number" value={eachProduct.qty} onChange={(event) => {
-            btnHandlerModifyProductAmount(eachProduct, Number(event.target.value))
-          }} />
-          {/* 減少 */}
-          <button type='button' onClick={() => {
-            btnHandlerDecreaseProduct(eachProduct)
-          }}>-</button>
-          {/* 刪除 */}
-          <button type='button' onClick={() => {
-            btnHandlerDeleteProduct(eachProduct)
-          }}>刪除</button>
-          {/* 增加 */}
-          <button type='button' onClick={() => { btnHandlerIecreaseProduct(eachProduct) }}>+</button>
-        </li >
-      );
-    })
-    .reverse()
-    ;
-
   return (
     <>
-      <button type='button' onClick={btnHandlerTest}>測試</button>
-      <h1>Cart Page</h1>
-      <div>{productList}</div>
-      <div>
-        <h3>coupon</h3>
-        {
-          usingCoupon.code
-            ?
-            <div>
-              <h4>已套用的 coupon</h4>
-              <div>名稱：{usingCoupon.title}</div>
-              <div>優惠代碼：{usingCoupon.code}</div>
-              <button type='button' onClick={cancelApplyCoupon} disabled={usingCoupon.code ? false : true}>取消套用此 coupon</button>
-            </div>
-            :
-            null
-        }
-        <label>
-          輸入優惠代碼：
-          <input type='text' value={inputCouponCode} onChange={(event) => setInputCouponCode(event.target.value)} />
-        </label>
-        <br />
-        <button type='button' onClick={btnHandlerApplyCoupon} disabled={inputCouponCode ? false : true}>套用 coupon</button>
-      </div>
-      <form>
-        <h3>收件資訊</h3>
-        <label>
-          姓名：
-          <input name='name' type='text' required value={recipientInfo.user.name} onChange={(event) => updateForm(event, 'name')} />
-        </label>
-        <br />
-        <label>
-          E-mail:
-          <input name='email' type='email' required value={recipientInfo.user.email} onChange={(event) => updateForm(event, 'email')} />
-        </label>
-        <br />
-        <label>
-          tel:
-          <input name='tel' type='tel' required value={recipientInfo.user.tel} onChange={(event) => updateForm(event, 'tel')} />
-        </label>
-        <br />
-        <label>
-          地址：
-          <input name='address' type='text' required value={recipientInfo.user.address} onChange={(event) => updateForm(event, 'address')} />
-        </label>
-        <br />
-        <label>
-          備註：
-          <textarea name='message' value={recipientInfo.message} onChange={(event) => updateForm(event, 'message')}></textarea>
-        </label>
-        <br />
-        <button type='button' onClick={btnHandlerSubmitForm}>送出訂單</button>
-      </form>
+      <NavBar />
+
+      <Container component="main"
+        sx={(theme) => ({
+          paddingTop: theme.spacing(4),
+          paddingBottom: theme.spacing(8),
+        })}
+      >
+        <Stack spacing={2}
+          sx={{
+            ...flexCenter(),
+          }}
+        >
+
+          {/* 頁面標題 */}
+          <Typography component="h1"
+            variant="h3"
+            align="center"
+          >
+            購物車
+          </Typography>
+
+          {/* 商品 */}
+          <Container>
+            <Typography component="h3"
+              variant="h4"
+              align="center"
+            >
+              商品
+            </Typography>
+            <TableContainer>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    {/* <TableCell align="center">圖片</TableCell> */}
+                    <TableCell align="center"
+                      sx={{
+                        minWidth: "100px"
+                      }}
+                    >商品</TableCell>
+                    <TableCell align="center"
+                      sx={{
+                        display: {
+                          xs: "none",
+                          sm: "table-cell",
+                        }
+                      }}
+                    >單價</TableCell>
+                    <TableCell align="center"
+                      sx={{
+                        maxWidth: "100px"
+                      }}
+                    >數量</TableCell>
+                    <TableCell align="center">小計</TableCell>
+                    <TableCell align="center">刪除</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {
+                    arrLocalStorageCart
+                      .map((eachProduct) => {
+                        return (
+                          <TableRow key={eachProduct.id}>
+                            {/* 商品名稱 */}
+                            <TableCell align="center">
+                              {eachProduct.title}
+                              <Box component="img"
+                                src={eachProduct.imageUrl}
+                                alt={eachProduct.title}
+                                sx={{
+                                  display: "block",
+                                  margin: "0 auto",
+                                  width: "100px",
+                                }}
+                              />
+                            </TableCell>
+                            {/* 商品單價(僅 PC 版) */}
+                            <TableCell align="center"
+                              sx={{
+                                display: {
+                                  xs: "none",
+                                  sm: "table-cell",
+                                },
+                              }}
+                            >
+                              {Number(eachProduct.price) * (usingCoupon.percent / 100)}
+                            </TableCell>
+                            {/* 商品數量 */}
+                            <TableCell align="center">
+                              <Box sx={{
+                                ...flexCenter(),
+                                flexDirection: {
+                                  xs: "column-reverse",
+                                  sm: "row",
+                                },
+                                margin: "0 auto",
+                                width: {
+                                  xs: "64px",
+                                  sm: "auto",
+                                },
+                                height: "100%",
+                              }}>
+
+                                {/* 減少 */}
+                                <IconButton color="primary"
+                                  onClick={() => { btnHandlerDecreaseProduct(eachProduct) }}
+                                >
+                                  <RemoveIcon />
+                                </IconButton>
+                                {/* 直接修改 */}
+                                <TextField
+                                  hiddenLabel
+                                  type="number"
+                                  size="small"
+                                  value={eachProduct.qty}
+                                  onChange={(event) => {
+                                    btnHandlerModifyProductAmount(eachProduct, Number(event.target.value))
+                                  }}
+                                  sx={{
+                                    width: "44px",
+                                    height: "44px",
+                                    input: {
+                                      textAlign: "center",
+                                      padding: "8.5px",
+                                    },
+                                  }}
+                                />
+                                {/* 增加 */}
+                                <IconButton color="primary"
+                                  onClick={() => { btnHandlerIecreaseProduct(eachProduct) }}
+                                >
+                                  <AddIcon />
+                                </IconButton>
+                              </Box>
+                            </TableCell>
+                            {/* 小計 */}
+                            <TableCell align="center">
+                              {Number(eachProduct.price) * (usingCoupon.percent / 100) * (eachProduct.qty)}
+                            </TableCell>
+                            {/* 刪除 */}
+                            <TableCell align="center">
+                              <IconButton color="error"
+                                onClick={() => {
+                                  btnHandlerDeleteProduct(eachProduct)
+                                }}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })
+                      .reverse()
+                  }
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+
+          {/* Coupon 相關 */}
+          <Container maxWidth="xs">
+            <Card elevation={0}
+              sx={{
+                backgroundColor: "transparent",
+              }}
+            >
+              {
+                usingCoupon.code
+                  ?
+                  <>
+                    <CardHeader
+                      title="已套用 coupon"
+                      align="center"
+                    />
+                    <CardContent sx={{
+                      ...flexCenter(),
+                      flexDirection: "column",
+                    }}>
+                      <Typography variant="body1" component="p">
+                        名稱：{usingCoupon.title}
+                      </Typography>
+                      <Typography variant="body1" component="p">
+                        優惠代碼：{usingCoupon.code}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button variant="outlined"
+                        color="error"
+                        onClick={cancelApplyCoupon}
+                        disabled={usingCoupon.code ? false : true}
+                        sx={{
+                          display: "block",
+                          margin: "0 auto",
+                        }}
+                      >取消套用此 coupon</Button>
+                    </CardActions>
+                  </>
+                  :
+                  <>
+                    <CardHeader
+                      title="套用 coupon"
+                      align="center"
+                    />
+                    <CardContent sx={{
+                      ...flexCenter(),
+                    }}>
+                      <TextField label="輸入優惠代碼"
+                        value={inputCouponCode}
+                        onChange={(event) => setInputCouponCode(event.target.value)}
+                      />
+                    </CardContent>
+                    <CardActions>
+                      <Button variant="outlined"
+                        onClick={btnHandlerApplyCoupon}
+                        disabled={inputCouponCode ? false : true}
+                        sx={{
+                          display: "block",
+                          margin: "0 auto",
+                        }}
+                      >套用 coupon</Button>
+                    </CardActions>
+                  </>
+              }
+            </Card>
+          </Container>
+
+          {/* 收件資訊 */}
+          <Container maxWidth="sm">
+            <form>
+              <Stack spacing={3}>
+                <Typography component="h3"
+                  variant="h4"
+                  align="center"
+                  sx={(theme) => ({
+                    marginTop: theme.spacing(2)
+                  })}
+                >
+                  收件資訊
+                </Typography>
+                {/* TODO: 待新增驗證邏輯 */}
+                <TextField label="姓名"
+                  required
+                  value={recipientInfo.user.name}
+                  onChange={(event) => updateForm(event, 'name')}
+                />
+                <TextField label="E-mail"
+                  required
+                  type="email"
+                  value={recipientInfo.user.email}
+                  onChange={(event) => updateForm(event, 'email')}
+                />
+                <TextField label="電話"
+                  required
+                  type="tel"
+                  value={recipientInfo.user.tel}
+                  onChange={(event) => updateForm(event, 'tel')}
+                />
+                <TextField label="地址"
+                  required
+                  value={recipientInfo.user.address}
+                  onChange={(event) => updateForm(event, 'address')}
+                />
+                <TextField label="備註"
+                  multiline
+                  value={recipientInfo.message}
+                  onChange={(event) => updateForm(event, 'message')}
+                />
+              </Stack>
+            </form>
+          </Container>
+        </Stack>
+
+        {/* 送出訂單 */}
+        <Box sx={(theme) => ({
+          ...flexCenter(),
+          marginTop: theme.spacing(6),
+        })}>
+          <Button variant="contained"
+            size="large"
+            onClick={btnHandlerSubmitForm}
+            sx={{
+              display: "block",
+              margin: "0 auto",
+              width: "200px",
+            }}
+          >
+            送出訂單
+          </Button>
+        </Box>
+      </Container >
+
       {/* DeletModal */}
       <Box>
         <Dialog
