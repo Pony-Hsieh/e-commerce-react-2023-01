@@ -4,6 +4,7 @@ import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';
 import SingleOrder from './pages/SingleOrder';
 import Shop from './pages/Shop';
+import ContactUs from './pages/ContactUs';
 import NoMatch from './pages/NoMatch';
 import CssBaseline from '@mui/material/CssBaseline'; // css normalize
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -23,6 +24,7 @@ function App() {
           <Route path={'/shop'} element={<Shop />}></Route>
           <Route path={'/singleOrder'} element={<SingleOrder />}></Route>
           <Route path={'/singleProduct'} element={<SingleProduct />}></Route>
+          <Route path={'/contactUs'} element={<ContactUs />}></Route>
           <Route path={'*'} element={<NoMatch />}></Route>
         </Routes>
       </ThemeProvider>
