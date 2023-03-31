@@ -53,6 +53,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavBar from "../components/NavBar";
+import AlertMessage from '../components/AlertMessage';
 import { flexCenter } from '../styles/muiCommonStyle';
 
 function Cart() {
@@ -141,19 +142,27 @@ function Cart() {
     // Step: 檢查收件資料是否符合規範
     switch (checkRecipientInfo()) {
       case 'name': {
-        alert('請填寫收件人名稱');
+        AlertMessage.error({
+          content: '請填寫收件人名稱'
+        });
         return;
       }
       case 'email': {
-        alert('請填寫 E-mail');
+        AlertMessage.error({
+          content: '請填寫 E-mail'
+        });
         return;
       }
       case 'tel': {
-        alert('請填寫收件人電話');
+        AlertMessage.error({
+          content: '請填寫收件人電話'
+        });
         return;
       }
       case 'address': {
-        alert('請填寫收件人地址');
+        AlertMessage.error({
+          content: '請填寫收件人地址'
+        });
         return;
       }
     }
@@ -198,7 +207,9 @@ function Cart() {
         orderId = res.data.orderId;
       }
     } catch (err) {
-      alert('訂單送出失敗，請重新整理頁面後再試');
+      AlertMessage.error({
+        content: '訂單送出失敗，請重新整理頁面後再試'
+      });
       console.error(err);
     }
 
@@ -302,7 +313,9 @@ function Cart() {
    */
   async function btnHandlerApplyCoupon() {
     if (inputCouponCode === '') {
-      alert('請輸入 coupon code');
+      AlertMessage.warning({
+        content: '請輸入 coupon code'
+      });
       // 如果值為空，該 button 也會 disable，使用者無法點擊
       return;
     }
@@ -315,7 +328,9 @@ function Cart() {
         percent: couponInfo.percent,
       });
       setInputCouponCode('');
-      alert(`成功套用 ${couponInfo.code}！`);
+      AlertMessage.success({
+        content: `成功套用 ${couponInfo.code}！`
+      });
     } catch (err) {
       console.error(err);
     }
@@ -331,7 +346,9 @@ function Cart() {
       code: '',
       percent: 100,
     });
-    alert('已取消套用 coupon');
+    AlertMessage.success({
+      content: '已取消套用 coupon'
+    });
   }
 
   /**
@@ -675,7 +692,7 @@ function Cart() {
             }} color="error">刪除</Button>
           </DialogActions>
         </Dialog>
-      </Box>
+      </Box >
     </>
   );
 }
