@@ -8,6 +8,19 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { cloneDeep } from 'lodash-es';
 import { getDataOrderSingle, payOrder } from '../api/order';
+import {
+  Grid,
+  Stack,
+  Box,
+  Typography,
+  Button,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material';
 
 function SingleOrder() {
   const [searchParams] = useSearchParams();
@@ -76,19 +89,68 @@ function SingleOrder() {
   function OrderProductInfo() {
     return (
       <>
-        <h4>訂單商品資訊</h4>
-        {
-          Object.keys(dataOrder.products).map((eachProduct) => {
-            return (
-              <div key={dataOrder.products[eachProduct].product.id}>
-                <div>商品名稱：{dataOrder.products[eachProduct].product.title}</div>
-                <div>訂購數量：{dataOrder.products[eachProduct].qty}</div>
-                <div>小計：{dataOrder.products[eachProduct].total}</div>
-                <img src={dataOrder.products[eachProduct].product.imageUrl} alt={dataOrder.products[eachProduct].product.title} style={{ width: '100px' }} />
-              </div>
-            )
-          })
-        }
+        <Typography component="h4"
+          variant="h5"
+          align="center"
+          sx={(theme) => ({
+            paddingTop: theme.spacing(4),
+            paddingBottom: theme.spacing(0),
+          })}
+        >
+          訂購商品資訊
+        </Typography>
+
+        <TableContainer>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">圖片</TableCell>
+                <TableCell align="center">名稱</TableCell>
+                <TableCell align="center" sx={{
+                  display: {
+                    xs: "none",
+                    sm: "table-cell",
+                  }
+                }}>單價</TableCell>
+                <TableCell align="center">數量</TableCell>
+                <TableCell align="center">小計</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                Object.keys(dataOrder.products).map((eachProduct) => {
+                  return (
+                    <TableRow key={dataOrder.products[eachProduct].id}>
+                      <TableCell align="center">
+                        <Box
+                          component="img"
+                          sx={{
+                            maxWidth: {
+                              xs: 50,
+                              md: 100
+                            },
+                          }}
+                          src={dataOrder.products[eachProduct].product.imageUrl}
+                          alt={dataOrder.products[eachProduct].product.title}
+                          draggable="false"
+                        />
+                      </TableCell>
+                      <TableCell align="center">{dataOrder.products[eachProduct].product.title}</TableCell>
+                      <TableCell align="center" sx={{
+                        display: {
+                          xs: "none",
+                          sm: "table-cell",
+                        }
+                      }}>{dataOrder.products[eachProduct].product.price}</TableCell>
+                      <TableCell align="center">{dataOrder.products[eachProduct].qty}</TableCell>
+                      <TableCell align="center">{dataOrder.products[eachProduct].total}</TableCell>
+                    </TableRow>
+                  )
+                })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
       </>
     );
   }
@@ -99,24 +161,85 @@ function SingleOrder() {
 
   return (
     <>
-      <h2>Single Order</h2>
-      <div>訂單 id：{dataOrder.id}</div>
-      <div>付款狀態：{dataOrder.is_paid ? '已付款' : '未付款'}</div>
-      <div>訂單金額：{dataOrder.total}</div>
-      <div>訂單成立時間：{orderTime}</div>
-      {/* 避免還沒拿到資料就讓 React 渲染，進而造成錯誤 */}
-      {
-        dataOrder.id ?
-          <OrderProductInfo />
-          : null
-      }
-      <button
-        type='button'
-        onClick={btnHandlerPayOrder}
-        disabled={dataOrder.is_paid ? true : false}
+      <Typography component="h2"
+        variant="h3"
+        align="center"
+        sx={(theme) => ({
+          paddingTop: theme.spacing(4)
+        })}
       >
-        {dataOrder.is_paid ? '已付款' : '付款'}
-      </button>
+        訂單詳情
+      </Typography>
+
+      <Box component="main"
+        sx={(theme) => ({
+          paddingY: theme.spacing(2)
+        })}
+      >
+        <Grid container spacing={{ xs: 0, md: 3 }}>
+          <Grid item xs sm />
+          <Grid item
+            xs={10}
+            sm={8}
+            md={6}
+            lg={4}
+          >
+            <TableContainer>
+              <Table aria-label="simple table">
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="center">訂單 id</TableCell>
+                    <TableCell align="center">{dataOrder.id}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="center" >訂單成立時間</TableCell>
+                    <TableCell align="center" >{orderTime}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="center">訂單金額</TableCell>
+                    <TableCell align="center">{dataOrder.total}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="center" sx={{
+                      borderBottom: "none"
+                    }}>付款狀態</TableCell>
+                    <TableCell align="center" sx={{
+                      borderBottom: "none"
+                    }}>{dataOrder.is_paid ? '已付款' : '未付款'}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {
+              !dataOrder.is_paid ?
+                <Button variant="contained"
+                  size="large"
+                  onClick={btnHandlerPayOrder}
+                  // disabled={dataOrder.is_paid ? true : false}
+                  sx={(theme) => ({
+                    display: "block",
+                    marginX: "auto",
+                    marginTop: theme.spacing(1),
+                    marginBottom: theme.spacing(3),
+                  })}
+                >
+                  付款
+                </Button>
+                :
+                null
+            }
+            <Stack spacing={2}>
+              {/* 避免還沒拿到資料就讓 React 渲染，進而造成錯誤 */}
+              {
+                dataOrder.id ?
+                  <OrderProductInfo />
+                  : null
+              }
+            </Stack>
+          </Grid>
+          <Grid item xs sm />
+        </Grid>
+      </Box>
     </>
   );
 };
