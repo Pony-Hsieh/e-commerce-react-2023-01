@@ -490,7 +490,6 @@ function Cart() {
                                 {/* 直接修改 */}
                                 <TextField
                                   hiddenLabel
-                                  type="number"
                                   size="small"
                                   value={eachProduct.qty}
                                   onChange={(event) => {
@@ -503,6 +502,10 @@ function Cart() {
                                       textAlign: "center",
                                       padding: "8.5px",
                                     },
+                                  }}
+                                  inputProps={{
+                                    inputMode: 'numeric',
+                                    pattern: '[0-9]*',
                                   }}
                                 />
                                 {/* 增加 */}
