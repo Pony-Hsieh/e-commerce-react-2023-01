@@ -8,15 +8,24 @@
       
 ### 難度 1
 - [ ] 調整 favicon
+- [ ] 調整 NavBar logo
 - [ ] 調整 lang、title
 ### 難度 2
 ### 難度 3
-- [ ] 顯示所有商品
+- [ ] 更新 聯繫我們
+- [ ] 如果目前的頁面與 NavBar 被點擊的是相同的頁面，則關閉 drawer
+- [x] 顯示所有商品
 - [x] 測試在執行特定行為後跳轉至特定頁面(例如首頁)
 - [x] 在 Cart 頁面顯示 local storage cart 內容
     - [x] 將商品加入 local storage cart
 ### 難度 5
-- [ ] 套用 material ui
+- [ ] 如果是首頁的話，則 Nav 的字體為白色
+- [ ] hover 的時候變更卡片的 elevation(SingleProductCard)
+- [x] 製作首頁
+- [ ] 製作商品頁
+    - [ ] 新增價格升降序排列的 filter
+- [x] 製作 navbar
+- [x] 套用 material ui
 - [ ] 送出訂單
     - [x] 檢查填寫欄位
         - [ ] 優化錯誤提示
@@ -26,16 +35,20 @@
             - [x] 清空 coupon
             - [x] 送出訂單後跳轉至 /singleOrder
         - 送出訂單失敗
+- [x] 更新購物車頁面樣式
 - [x] 製作 single order 頁面
     - 送出訂單後會跳轉到這個頁面，供客戶付款
     - [x] 串接取得單筆訂單資訊 api
     - [x] 串接付款 api
     - [x] 測試付款流程
     - [x] 顯示該筆訂單商品
+    - [x] 更新頁面樣式
 - [x] 取得 coupon
     - [x] 驗證使用者填寫的 coupon 是否有效
 ### 難度 8
-- [ ] 撰寫收件資訊驗證邏輯
+- [ ] 移除 input number 的上下鍵頭
+- [ ] 保存商城頁面的狀態，不會一切換回來就整個不見
+- [ ] 完善收件資訊驗證邏輯
 - [ ] 測試結帳流程
     - [x] 有套用 coupon
         - [x] 結帳完成後會跳轉至 singleOrder 頁面
@@ -57,6 +70,6 @@
 ### 難度 8
 - [ ] 點選 "刪除" 按鈕，跳出 確認刪除 modal
     - [ ] 使用 `ReactDOM.createPortal` 實作 modal
-- [ ] 製作提示訊息取代 alert
+- [x] 製作提示訊息取代 alert
 
       
