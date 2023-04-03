@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -12,6 +13,7 @@ import { flexCenter } from '../styles/muiCommonStyle';
 function SingleProductCard(props) {
   const { dataProduct } = props;
   const navigate = useNavigate();
+  const [cardElevation, setCardElevation] = useState(1);
 
   /**
    * 卡片被點擊後要做的事
@@ -22,13 +24,15 @@ function SingleProductCard(props) {
   }
 
   return (
-    <Card elevation={1}
+    <Card elevation={cardElevation}
       sx={{
         "&:hover": {
           cursor: "pointer",
         },
       }}
       onClick={() => { cardClickHandler(dataProduct.id) }}
+      onMouseEnter={() => { setCardElevation(8) }}
+      onMouseLeave={() => { setCardElevation(1) }}
     >
       <CardContent >
         <Stack spacing={2}
