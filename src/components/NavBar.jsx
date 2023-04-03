@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -18,12 +18,26 @@ import logo from '../images/temp-logo.png';
 
 function NavBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const buttonColor = location.pathname === "/" ? "#fff" : "";
 
   const [drawerOpenStatus, setDrawerOpenStatus] = useState(false);
 
   function toggleDrawer() {
     setDrawerOpenStatus(!drawerOpenStatus);
+  }
+
+  /** 跳轉到指定頁面
+   * 跳轉前會先檢查是否與當前頁面一致；如果是的話，則不跳轉
+   * @param {string} targetPath - 目標路徑
+   * @param {"mobile"|undefined} layout - 目前版型
+   */
+  function goToPage(targetPath, layout) {
+    if (targetPath === location.pathname && layout === "mobile") {
+      toggleDrawer();
+      return;
+    }
+    navigate(targetPath);
   }
 
   return (
@@ -54,55 +68,55 @@ function NavBar() {
       >
         <List>
           <ListItem>
-            <ListItemButton component={Link}
-              to="/"
+            <ListItemButton component="a"
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            >
-              首頁
-            </ListItemButton>
+              onClick={() => {
+                goToPage("/", "mobile");
+              }}
+            >首頁</ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton component={Link}
-              to="/shop"
+            <ListItemButton component="a"
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            >
-              商城
-            </ListItemButton>
+              onClick={() => {
+                goToPage("/shop", "mobile");
+              }}
+            >商城</ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton component={Link}
-              to="/cart"
+            <ListItemButton component="a"
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            >
-              購物車
-            </ListItemButton>
+              onClick={() => {
+                goToPage("/cart", "mobile");
+              }}
+            >購物車</ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton component={Link}
-              to="/contactUs"
+            <ListItemButton component="a"
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
-            >
-              聯繫我們
-            </ListItemButton>
+              onClick={() => {
+                goToPage("/contactUs", "mobile");
+              }}
+            >聯繫我們</ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton component={Link}
+            <ListItemButton component="a"
               onClick={toggleDrawer}
               sx={{
                 display: "flex",
@@ -158,36 +172,48 @@ function NavBar() {
                 }}
               >
                 <Button
-                  component={Link}
-                  to="/"
+                  component="a"
                   size="large"
                   sx={{
                     width: "25%",
                     color: buttonColor,
-                  }}>首頁</Button>
+                  }}
+                  onClick={() => {
+                    goToPage("/");
+                  }}
+                >
+                  首頁
+                </Button>
                 <Button
-                  component={Link}
-                  to="/shop"
+                  component="a"
                   size="large"
                   sx={{
                     width: "25%",
                     color: buttonColor,
-                  }}>商城</Button>
+                  }}
+                  onClick={() => {
+                    goToPage("/shop");
+                  }}
+                  >商城</Button>
                 <Button
-                  component={Link}
-                  to="/cart"
+                  component="a"
                   size="large"
                   sx={{
                     width: "25%",
                     color: buttonColor,
+                  }}
+                  onClick={() => {
+                    goToPage("/cart");
                   }}>購物車</Button>
                 <Button
-                  component={Link}
-                  to="/contactUs"
+                  component="a"
                   size="large"
                   sx={{
                     width: "25%",
                     color: buttonColor,
+                  }}
+                  onClick={() => {
+                    goToPage("/contactUs");
                   }}>聯繫我們</Button>
               </Stack>
             </Box>
