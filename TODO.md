@@ -13,14 +13,16 @@
 ### 難度 2
 ### 難度 3
 - [ ] 更新 聯繫我們
-- [ ] 如果目前的頁面與 NavBar 被點擊的是相同的頁面，則關閉 drawer
+- [ ] 製作 footer
+- [ ] 完善提示訊息
+- [x] 如果目前的頁面與 NavBar 被點擊的是相同的頁面，則關閉 drawer
 - [x] 顯示所有商品
 - [x] 測試在執行特定行為後跳轉至特定頁面(例如首頁)
 - [x] 在 Cart 頁面顯示 local storage cart 內容
     - [x] 將商品加入 local storage cart
 ### 難度 5
-- [ ] 如果是首頁的話，則 Nav 的字體為白色
-- [ ] hover 的時候變更卡片的 elevation(SingleProductCard)
+- [x] 如果是首頁的話，則 Nav 的字體為白色
+- [x] hover 的時候變更卡片的 elevation(SingleProductCard)
 - [x] 製作首頁
 - [ ] 製作商品頁
     - [ ] 新增價格升降序排列的 filter
@@ -46,7 +48,6 @@
 - [x] 取得 coupon
     - [x] 驗證使用者填寫的 coupon 是否有效
 ### 難度 8
-- [ ] 移除 input number 的上下鍵頭
 - [ ] 保存商城頁面的狀態，不會一切換回來就整個不見
 - [ ] 完善收件資訊驗證邏輯
 - [ ] 測試結帳流程
@@ -57,6 +58,7 @@
         - [x] 結帳完成後會跳轉至 singleOrder 頁面，使用者需要可以付款
         - [x] 點擊 "付款" 需要可以付款，並更新頁面上相對應的資料
     - [ ] 如果發生沒有將 local storage cart 全部加入 server cart 的狀況，要怎麼處理？
+- [x] 移除 input number 的上下鍵頭
 - [x] 測試 cart 頁面能否正常的運作
     - [x] 增加、減少 購物車內商品數量
     - [x] 移除 購物車內商品
@@ -70,6 +72,7 @@
 ### 難度 8
 - [ ] 點選 "刪除" 按鈕，跳出 確認刪除 modal
     - [ ] 使用 `ReactDOM.createPortal` 實作 modal
+          此功能已完成，但還不確定是不是用 ReactDOM.createPortal 這個方法製作完成
 - [x] 製作提示訊息取代 alert
 
       
