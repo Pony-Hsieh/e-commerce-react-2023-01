@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Box,
   Grid,
@@ -17,6 +17,8 @@ import logo from '../images/temp-logo.png';
 
 
 function NavBar() {
+  const location = useLocation();
+  const buttonColor = location.pathname === "/" ? "#fff" : "";
 
   const [drawerOpenStatus, setDrawerOpenStatus] = useState(false);
 
@@ -161,6 +163,7 @@ function NavBar() {
                   size="large"
                   sx={{
                     width: "25%",
+                    color: buttonColor,
                   }}>首頁</Button>
                 <Button
                   component={Link}
@@ -168,6 +171,7 @@ function NavBar() {
                   size="large"
                   sx={{
                     width: "25%",
+                    color: buttonColor,
                   }}>商城</Button>
                 <Button
                   component={Link}
@@ -175,6 +179,7 @@ function NavBar() {
                   size="large"
                   sx={{
                     width: "25%",
+                    color: buttonColor,
                   }}>購物車</Button>
                 <Button
                   component={Link}
@@ -182,6 +187,7 @@ function NavBar() {
                   size="large"
                   sx={{
                     width: "25%",
+                    color: buttonColor,
                   }}>聯繫我們</Button>
               </Stack>
             </Box>
