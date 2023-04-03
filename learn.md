@@ -98,6 +98,10 @@
         这个是因为 immer 只能处理可序列化的简单对象，不能处理类的实例，如果你的 action.payload 是一个类的实例，就会出现这个警告。  
         这里就需要对 action.payload 进行浅拷贝将它转化为一个简单对象。我们业务中的 action.payload 实际情况比较复杂，所以先关掉了 serializableCheck 检查，后面再优化这里的逻辑
     - [redux-toolkit 报无法序列化 Warning A non-serializable value was detected in an action](https://blog.csdn.net/m0_48474585/article/details/121462589)
+- input 相關
+    - [mui v5 text field](https://mui.com/material-ui/react-text-field/#type-quot-number-quot)
+    - [HTML5 input 中的 pattern 屬性](https://yuugou727.github.io/blog/2018/02/20/html5-pattern/)
+    - [用 inputmode 決定你的鍵盤](https://medium.com/@debbyji/%E7%94%A8-inputmode-%E6%B1%BA%E5%AE%9A%E4%BD%A0%E7%9A%84%E9%8D%B5%E7%9B%A4-f9452e72abdd)
 - 其他
     - [你不知道的 console.log()](https://juejin.cn/post/7082018229559754789)
     - [開發不難，會 Debug 就好！如何靈活運用 Chrome DevTools 來開發網站](https://5xruby.tw/posts/how-to-use-chrome-devtools)
