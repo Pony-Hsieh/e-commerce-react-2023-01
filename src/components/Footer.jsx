@@ -9,7 +9,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { flexCenter } from '../styles/muiCommonStyle';
-import logo from '../images/temp-logo.png';
+import logo from '../images/logo-white.webp';
 
 
 function Footer() {
@@ -35,11 +35,19 @@ function Footer() {
         </Grid>
         {/* logo */}
         <Grid item xs={12} md={4}>
-          <Box sx={{
+          <Box sx={(theme) => ({
             ...flexCenter(),
+            padding: theme.spacing(3),
             height: "100%",
-          }}>
-            <Box component="img" src={logo} alt="logo" draggable="false" />
+          })}>
+            <Box component="img"
+              src={logo}
+              alt="logo"
+              draggable="false"
+              sx={{
+                maxWidth: "200px"
+              }}
+            />
           </Box>
         </Grid>
         {/* 社群媒體 */}

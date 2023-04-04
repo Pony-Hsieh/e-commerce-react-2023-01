@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import logo from '../images/temp-logo.png';
+import logo from '../images/logo-white.webp';
 
 
 function NavBar() {
@@ -139,27 +139,29 @@ function NavBar() {
         }
       }}>
         <Grid container>
-          <Grid item xs={1}>
-            <Box sx={{
+          <Grid item xs={2}>
+            <Box sx={(theme) => ({
+              padding: theme.spacing(2),
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-            }}>
+            })}>
               <Box component="img"
                 src={logo}
                 sx={{
-                  maxHeight: "64px"
+                  maxHeight: "48px"
                 }}
               />
             </Box>
           </Grid>
-          <Grid item xs={11}>
+          <Grid item xs={10}>
             <Box component="ul"
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 margin: "0",
+                padding: "0",
                 width: "100%",
                 height: "100%",
               }}>
@@ -194,7 +196,7 @@ function NavBar() {
                   onClick={() => {
                     goToPage("/shop");
                   }}
-                  >商城</Button>
+                >商城</Button>
                 <Button
                   component="a"
                   size="large"
