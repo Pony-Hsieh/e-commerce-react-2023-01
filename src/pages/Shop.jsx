@@ -16,6 +16,7 @@ import {
   TextField,
 } from '@mui/material';
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import SingleProductCard from '../components/SingleProductCard';
 
 
@@ -344,6 +345,7 @@ function Shop() {
           </Grid>
         </Grid>
       </Box>
+      <Footer/>
     </>
   );
 }

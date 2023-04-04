@@ -53,6 +53,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import AlertMessage from '../components/AlertMessage';
 import { flexCenter } from '../styles/muiCommonStyle';
 
@@ -671,6 +672,8 @@ function Cart() {
           </Button>
         </Box>
       </Container >
+
+      <Footer />
 
       {/* DeletModal */}
       <Box>
