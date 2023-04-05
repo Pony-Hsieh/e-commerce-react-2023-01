@@ -11,7 +11,7 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename='/e-commerce-react-2023-01'>
       <App />
     </BrowserRouter>
   </Provider>
