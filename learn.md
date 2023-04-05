@@ -6,7 +6,6 @@
     - [【React.js入門 - 20】 useEffect - 在function component用生命週期](https://ithelp.ithome.com.tw/articles/10223344)
         > useEffect接收兩個參數，第一個是一個函式，定義componentDidMount或componentDidUpdate要做什麼事，此函式的回傳值也要是一個函式，表示componentWillUnmount 要做什麼事。  
         第二個是一個array，裡面是定義當哪些變數被改變時，這個useEffect要重新被觸發。有點像是過去我們在componentDidUpdate寫prevState!=this.state這種感覺。
-    - 
 - useRef
     > 可以當作是產生一個「被改變後不會觸發re-render」變數的hook
 - [useDispatch() Redux 官方文件](https://react-redux.js.org/api/hooks#usedispatch)
@@ -73,6 +72,7 @@
         > 另外雖然可以透過 .eslintrc. 設定 Prettier，但不推薦，因為有些 VS Code extensions(ex: prettier-vscode) 只讀 .prettierrc
     - [Day 28 - 為什麼要用 ESLint & Prettier](https://ithelp.ithome.com.tw/articles/10307991)
 - JS 相關
+    - [淺談新手在學習 SPA 時的常見問題：以 Router 為例](https://blog.huli.tw/2019/09/18/spa-common-problem-about-router/)
     - [Uncaught SyntaxError: Failed to execute 'querySelector' on 'Document'](https://stackoverflow.com/questions/37270787/uncaught-syntaxerror-failed-to-execute-queryselector-on-document)
         > `querySelector` method uses CSS3 selectors for querying the DOM and CSS3 doesn't support ID selectors that start with a digit
     - [[javascript] 清空 array 的方法介紹與比較(new、pop 及 shift…等)](https://blog.camel2243.com/2017/06/12/javascript-%E6%B8%85%E7%A9%BA-array-%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9%E8%88%87%E6%AF%94%E8%BC%83new%E3%80%81pop-%E5%8F%8A-shift-%E7%AD%89/)
@@ -89,8 +89,14 @@
         console.log(module.obj);
         ```
     - [How to Set Dynamic Object Properties using Computed Property Names](https://www.freecodecamp.org/news/how-to-set-dynamic-object-properties-using-computed-property-names/)
-- [教你用 React createPortal](https://juejin.cn/post/7036380015365193735)
+- HTML 相關
+    - [為什麼要使用 rel="noreferrer noopener"，談 target="_blank" 的安全性風險](https://pjchender.blogspot.com/2020/05/relnoreferrer-targetblank.html)
+    - input 相關
+        - [mui v5 text field](https://mui.com/material-ui/react-text-field/#type-quot-number-quot)
+        - [HTML5 input 中的 pattern 屬性](https://yuugou727.github.io/blog/2018/02/20/html5-pattern/)
+        - [用 inputmode 決定你的鍵盤](https://medium.com/@debbyji/%E7%94%A8-inputmode-%E6%B1%BA%E5%AE%9A%E4%BD%A0%E7%9A%84%E9%8D%B5%E7%9B%A4-f9452e72abdd)
 - React 相關
+    - [教你用 React createPortal](https://juejin.cn/post/7036380015365193735)
     - [React 中 input 輸入自動失去焦點](https://juejin.cn/post/7081924043611308069)
     - [React Input 框輸入一次就失焦](https://blog.csdn.net/qq_50825973/article/details/117435633)
     - [使用 @reduxjs/toolkit 简化 redux 代码](https://www.jianshu.com/p/77fa764dec69)
@@ -98,10 +104,11 @@
         这个是因为 immer 只能处理可序列化的简单对象，不能处理类的实例，如果你的 action.payload 是一个类的实例，就会出现这个警告。  
         这里就需要对 action.payload 进行浅拷贝将它转化为一个简单对象。我们业务中的 action.payload 实际情况比较复杂，所以先关掉了 serializableCheck 检查，后面再优化这里的逻辑
     - [redux-toolkit 报无法序列化 Warning A non-serializable value was detected in an action](https://blog.csdn.net/m0_48474585/article/details/121462589)
-- input 相關
-    - [mui v5 text field](https://mui.com/material-ui/react-text-field/#type-quot-number-quot)
-    - [HTML5 input 中的 pattern 屬性](https://yuugou727.github.io/blog/2018/02/20/html5-pattern/)
-    - [用 inputmode 決定你的鍵盤](https://medium.com/@debbyji/%E7%94%A8-inputmode-%E6%B1%BA%E5%AE%9A%E4%BD%A0%E7%9A%84%E9%8D%B5%E7%9B%A4-f9452e72abdd)
+- Github Pages 部屬相關
+    - [在 github page 部署 react — 簡述為何重新整理出現 404 feat.解決方案](https://ithelp.ithome.com.tw/articles/10297281)
+    - [github page 重新整理 404 — 解決方案](https://github.com/rafgraph/spa-github-pages#how-it-works)
+    - [將專案部署到 GitHub Pages](https://pjchender.dev/react-bootcamp/docs/bootcamp/week5/deployment)
+    - [create react app 官方文件](https://create-react-app.dev/docs/deployment#github-pages)
 - 其他
     - [你不知道的 console.log()](https://juejin.cn/post/7082018229559754789)
     - [開發不難，會 Debug 就好！如何靈活運用 Chrome DevTools 來開發網站](https://5xruby.tw/posts/how-to-use-chrome-devtools)
