@@ -106,3 +106,16 @@
     - [你不知道的 console.log()](https://juejin.cn/post/7082018229559754789)
     - [開發不難，會 Debug 就好！如何靈活運用 Chrome DevTools 來開發網站](https://5xruby.tw/posts/how-to-use-chrome-devtools)
         - 如何用 clip-path 畫多邊形
+    - [[Git] 修改 git commit 的作者名稱 author name 與 email](https://progressbar.tw/notes/Git/203)
+        1. `$ git rebase -i <要修改作者的 commit 的前一個commit hash>`
+        2. 進入終端機互動模式後，將該 commit 開頭的 pick 改成 edit 或是 e
+        3. 按下 esc
+        4. 輸入 `:wq`
+        5. `$ git commit --amend --author="新name <新Email>"`  
+           mail 記得要用角括號包起來
+        6. 進入終端機互動模式後，甚麼都不用動
+        7. 按下 esc
+        8. 輸入 `:q`
+        9. `$ git rebase --continue` 進入下一個修改
+        10. 重複以上步驟，直到顯示 `Successfully rebased and updated xxxxxx.`  
+            例如："Successfully rebased and updated refs/heads/develop."
