@@ -7,15 +7,14 @@
 ## 新的 feature
       
 ### 難度 1
-- [x] 調整 favicon
-- [x] 調整 NavBar logo
-- [x] 調整 lang、title
+- [ ] 調整 favicon
+- [ ] 調整 NavBar logo
+- [ ] 調整 lang、title
 ### 難度 2
 ### 難度 3
+- [ ] 更新 聯繫我們
+- [ ] 製作 footer
 - [ ] 完善提示訊息
-- [ ] 等待 loading 圖片時，使用 skeleton
-- [x] 更新 聯繫我們
-- [x] 製作 footer
 - [x] 如果目前的頁面與 NavBar 被點擊的是相同的頁面，則關閉 drawer
 - [x] 顯示所有商品
 - [x] 測試在執行特定行為後跳轉至特定頁面(例如首頁)
