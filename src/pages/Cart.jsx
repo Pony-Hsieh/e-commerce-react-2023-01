@@ -150,13 +150,13 @@ function Cart() {
       }
       case 'email': {
         AlertMessage.error({
-          content: '請填寫 E-mail'
+          content: '請填寫正確的 E-mail'
         });
         return;
       }
       case 'tel': {
         AlertMessage.error({
-          content: '請填寫收件人電話'
+          content: '請填寫正確的收件人電話'
         });
         return;
       }
@@ -271,19 +271,76 @@ function Cart() {
   }
 
   /**
+   * 檢查 姓名
+   * @param {string} name - 要檢查的姓名
+   */
+  function checkName(name) {
+    if (name === '') {
+      return false;
+    }
+  }
+
+  /**
+   * 檢查 email
+   * @param {string} email - 要檢查的 email
+   */
+  function checkEmail(email) {
+    if (email === '') {
+      return false;
+    }
+    const emailReg = /^[^\s]+@[^\s]+\.[^\s]{2,3}$/;
+    if (!emailReg.test(recipientInfo.user.email)) {
+      console.log("錯誤的 email");
+      return false;
+    }
+  }
+
+  /**
+   * 檢查 tel
+   * @param {string} tel - 要檢查的 tel
+   */
+  function checkTel(tel) {
+    // Step: 檢查 電話
+    if (tel === '') {
+      return false;
+    }
+    // 檢查 手機
+    const cellphoneReg = /^09\d{8}$/;
+    if (!cellphoneReg.test(tel)) {
+      return false;
+    }
+
+    // 檢查 市話
+    const telephoneReg = /0d{1,2}-d{6,8}$/;
+    if (!telephoneReg.test(tel)) {
+      return false;
+    }
+  }
+
+  /**
+   * 檢查 地址
+   * @param {string} address - 要檢查的地址
+   */
+  function checkName(address) {
+    if (address === '') {
+      return false;
+    }
+  }
+
+  /**
    * 檢查表單是否都有正確填寫
    */
   function checkRecipientInfo() {
-    if (recipientInfo.user.name === '') {
+    if (checkName(recipientInfo.user.name) === false) {
       return 'name';
     }
-    if (recipientInfo.user.email === '') {
+    if (checkEmail(recipientInfo.user.email) === false) {
       return 'email';
     }
-    if (recipientInfo.user.tel === '') {
+    if (checkTel(recipientInfo.user.tel) === false) {
       return 'tel';
     }
-    if (recipientInfo.user.address === '') {
+    if (checkAddress(recipientInfo.user.address) === false) {
       return 'address';
     }
     return true;

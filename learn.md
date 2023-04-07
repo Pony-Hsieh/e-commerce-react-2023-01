@@ -102,6 +102,10 @@
     - [mui v5 text field](https://mui.com/material-ui/react-text-field/#type-quot-number-quot)
     - [HTML5 input 中的 pattern 屬性](https://yuugou727.github.io/blog/2018/02/20/html5-pattern/)
     - [用 inputmode 決定你的鍵盤](https://medium.com/@debbyji/%E7%94%A8-inputmode-%E6%B1%BA%E5%AE%9A%E4%BD%A0%E7%9A%84%E9%8D%B5%E7%9B%A4-f9452e72abdd)
+- 正則表達式相關
+    - [檢驗 email](https://blog.xuite.net/mp600.fh/skill/37058372)
+    - [檢驗 手機號碼]()
+    - [檢驗 市話]()
 - 其他
     - [你不知道的 console.log()](https://juejin.cn/post/7082018229559754789)
     - [開發不難，會 Debug 就好！如何靈活運用 Chrome DevTools 來開發網站](https://5xruby.tw/posts/how-to-use-chrome-devtools)
